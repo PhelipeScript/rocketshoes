@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RocketShoes 2.0</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 </head>
 <body>
     <div hidder class="opening-image">
@@ -18,9 +19,9 @@
     </div>
     <div class="rocketshoes">
         <header>
-            <nav class="nav-box">
+            <nav class="nav-box close">
                 <div class="sidebar">
-                    <i class="gg-menu menu-opened"></i>
+                    <i class="fa-solid fa-bars menu-opened"></i>
                     <ul>
                         <li>
                             <i class="gg-search"></i>
@@ -46,10 +47,27 @@
                     </div>
                 </div>
             </nav>
-            <i class="gg-menu menu-closed"></i>
+            <i class="fa-solid fa-bars menu-closed"></i>
             <h1>RocketShoes</h1>
             <i class="gg-shopping-cart"></i>
         </header>
+
+        <main>
+            <div class="wrapper">
+                <i id="left" class="fa-solid fa-angle-left"></i>
+                <div class="carousel">
+                    <img src="assets/img-1.jpeg" alt="img" draggable="false">
+                    <img src="assets/img-2.png" alt="img" draggable="false">
+                    <img src="assets/img-3.jpeg" alt="img" draggable="false">
+                    <img src="assets/img-4.jpeg" alt="img" draggable="false">
+                    <img src="assets/img-5.jpeg" alt="img" draggable="false">
+                    <img src="assets/img-6.png" alt="img" draggable="false">
+                    <img src="assets/img-7.jpeg" alt="img" draggable="false">
+                </div>
+                <i id="right" class="fa-solid fa-angle-right"></i>
+            </div>
+        </main>
+
     </div>
 
     <script src="main.js"></script>
