@@ -2,7 +2,8 @@ const   sidebar = document.querySelector('.nav-box'),
         menuOpened = document.querySelector('.menu-opened'),
         menuClosed = document.querySelector('.menu-closed'),
         main = document.querySelector('main'),
-        listSelected = document.querySelectorAll('.sidebar ul li')
+        categories = document.querySelectorAll('.sidebar ul li'),
+        searchInput = document.querySelector('.search-categories input')
 
 menuClosed.addEventListener('click', () => {
     sidebar.classList.remove('close')
@@ -16,14 +17,35 @@ menuOpened.addEventListener('click', () => {
     main.style = 'filter: none'
 })
 
-listSelected.forEach((li) => {
-    li.addEventListener('click', () => {
-        listSelected.forEach((li) => {
-            li.classList.remove('selected')
+categories.forEach((categorie) => {
+    categorie.addEventListener('click', () => {
+        categories.forEach((categorie) => {
+            categorie.classList.remove('selected')
         })
-        li.classList.add('selected')
+        categorie.classList.add('selected')
     })
 })
+
+searchInput.addEventListener('input', searchCategories)
+
+function searchCategories() {
+    let userInput = searchInput.value.toLowerCase()
+    if (userInput != '') {
+        for(let categorie of categories) {
+            let categorieName = categorie.textContent.toLowerCase()
+            if(categorieName.includes(userInput)) {
+                categorie.style = 'display: flex'
+            } else {
+                categorie.style = 'display: none'
+            }
+        }
+    } else {
+        for(let categorie of categories) {
+            categorie.style = 'display: flex'
+        }
+    }
+
+}
 
 const carousel = document.querySelector('.carousel')
 const firstImg = carousel.querySelectorAll('img')[0]
