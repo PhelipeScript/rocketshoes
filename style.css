@@ -4,6 +4,15 @@
     box-sizing: border-box;
 }
 
+html::-webkit-scrollbar {
+    width: 1vw;
+    background-color: #343F4F;
+}
+
+html::-webkit-scrollbar-thumb {
+    background-color: #2c2c2c;
+}
+
 body {
     height: 100vh;
     font-family: 'Roboto', sans-serif;
@@ -22,10 +31,7 @@ body {
 }
 
 .opening-image {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: fixed;
     background-color: #FFF;
     width: 100%;
     height: 100%;
@@ -46,20 +52,27 @@ body {
 }
 
 .opening-image img {
+    animation: rotateLogo 2s ease ;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    translate: -50%;
     width: 150px;
     height: 105px;
-    animation: rotateLogo 2s ease ;
 }
 
 @keyframes openingApp {
     0% {
         opacity: 0;
+        width: 0px;
     }
     90% {
         opacity: 0;
+        width: 0;
     }
     100% {
         opacity: 1;
+        width: 100%;
     }
 }
 
@@ -71,6 +84,7 @@ body {
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
     z-index: 1;
     position: relative;
+    display: block;
     animation: openingApp 3s ease forwards;
 }
 
@@ -91,21 +105,22 @@ header nav {
     top: 0;
     left: 0;
     height: 100vh;
-    max-width: 300px;
     padding: 10px 10px 0px;
-    opacity: 0;
-    z-index: 1;
     background-color: #2c2c2c;
     color: #FFF;
 }
 
 @keyframes sidebarOpen {
-    from {
+    0% {
         width: 0px;
     }
+
+    95% {
+        width: 35%;
+    }
     
-    to {
-        width: 50%;
+    100% {
+        width: 100%;
         z-index: 1;
         opacity: 1;
     }
@@ -113,11 +128,12 @@ header nav {
 
 header nav.open {
     animation: sidebarOpen .7s forwards;
+    max-width: 35%;
 }
 
 @keyframes sidebarClose {
     0% {
-        width: 50%;
+        width: 30%;
         z-index: 1;
         opacity: 1;
     }
@@ -144,6 +160,15 @@ nav .sidebar {
     position: relative;
     width: 100%;
     height: 100%;
+}
+
+.sidebar > img {
+    width: 30px;
+    height: 25px;
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    transform: translate(-20px);
 }
 
 .sidebar .user-info {
@@ -211,6 +236,10 @@ nav .sidebar {
     background-color: #FFF;
 }
 
+.sidebar ul li:nth-child(1).selected {
+    background-color: #FFF;
+}
+
 .sidebar ul li:nth-child(1) input {
     width: 100%;
     height: 100%;
@@ -239,6 +268,11 @@ nav .sidebar {
     background-color: #242526;
 }
 
+.sidebar ul li.selected {
+    background-color: #8257E5;
+    color: #FFF;
+}
+
 i {
     cursor: pointer;
     color: #8257E5;
@@ -255,14 +289,21 @@ header h1 {
 main {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0 35px;
-    height: 100%;
+    padding: 45px 35px 0px;
+    min-height: 100%;
     background-color: #343F4F;
 }
 
+main h2 {
+    font-size: 2rem;
+    text-align: center;
+    color: #8257E5;
+    margin-top: 20px;
+    text-shadow: 5px 5px 20px rgba(0, 0, 0, 0.7);
+}
+
 main .wrapper {
+    margin-top: 20px;
     max-width: 1200px;
     position: relative;
 }
@@ -278,6 +319,7 @@ main .wrapper {
     background-color: #FFF;
     border-radius: 50%;
     transform: translateY(-50%);
+    z-index: 1;
 }
 
 .wrapper > i:first-child {
@@ -311,10 +353,20 @@ main .wrapper .carousel {
     object-fit: cover;
     margin-left: 14px;
     width: calc(100% / 3);
+    transition: transform 1s ease;
+}
+
+.carousel img:hover {
+    transform: scale(1.1);
 }
 
 .carousel img:first-child {
     margin-left: 0px;
+}
+
+main .products {
+    margin-top: 50px;
+    border-top: 2px solid #242526;
 }
 
 @media screen and (max-width: 900px) {
@@ -324,6 +376,38 @@ main .wrapper .carousel {
 }
 
 @media screen and (max-width: 550px) {
+    @keyframes sidebarOpen {
+        0% {
+            width: 0px;
+        }
+        
+        100% {
+            width: 100%;
+            z-index: 1;
+            opacity: 1;
+        }
+    }
+    
+    header nav.open {
+        max-width: 100%;
+    }
+    
+    @keyframes sidebarClose {
+        0% {
+            width: 100%;
+            z-index: 1;
+            opacity: 1;
+        }
+        
+        100% {
+            width: 0px;
+            opacity: 0;
+            z-index: 0;
+            display: none;
+            transform: translate(-30px);
+        }
+    }
+
     .carousel img {
         width: calc(100%);
     }

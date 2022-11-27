@@ -1,17 +1,29 @@
 const   sidebar = document.querySelector('.nav-box'),
         menuOpened = document.querySelector('.menu-opened'),
-        menuClosed = document.querySelector('.menu-closed');
+        menuClosed = document.querySelector('.menu-closed'),
+        main = document.querySelector('main'),
+        listSelected = document.querySelectorAll('.sidebar ul li')
 
 menuClosed.addEventListener('click', () => {
     sidebar.classList.remove('close')
     sidebar.classList.add('open')
+    main.style = 'filter: blur(4px)'
 })
 
 menuOpened.addEventListener('click', () => {
     sidebar.classList.remove('open')
     sidebar.classList.add('close')
+    main.style = 'filter: none'
 })
 
+listSelected.forEach((li) => {
+    li.addEventListener('click', () => {
+        listSelected.forEach((li) => {
+            li.classList.remove('selected')
+        })
+        li.classList.add('selected')
+    })
+})
 
 const carousel = document.querySelector('.carousel')
 const firstImg = carousel.querySelectorAll('img')[0]
