@@ -32,6 +32,9 @@ body {
 
 .opening-image {
     position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #FFF;
     width: 100%;
     height: 100%;
@@ -53,10 +56,6 @@ body {
 
 .opening-image img {
     animation: rotateLogo 2s ease ;
-    position: fixed;
-    top: 40%;
-    left: 50%;
-    translate: -50%;
     width: 150px;
     height: 105px;
 }
@@ -383,11 +382,12 @@ main .wrapper {
 
 main .products {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 10px;
     margin: 50px 10px;
-    text-align: center;
+    text-align: center; 
+    padding: 10px 0px;
 }
 
 .products .card {
@@ -396,30 +396,45 @@ main .products {
     width: 210px;
     height: 385px;
     border-radius: 0px 0px 6px 6px;
+    transition: all .3s ease;
+}
+
+.products .card:hover {
+    transform: scale(1.03);
 }
 
 .card .image {
     width: 100%;
-    height: 70%;
+    height: 65%;
+    cursor: pointer;
 }
 
 .card .image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: top;
+}
+
+.card .name-price {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 3px;
+    height: 20%;
+    margin-bottom: 6px;
 }
 
 .card .name-price h3 {
     font-size: 1rem;
     font-weight: 700;
-    margin: 10px 20px 7px;
+    margin: 7px 20px;
+    align-self: center;
 }
 
 .card .name-price .price {
     font-size: 14px;
     font-weight: 400;
     text-decoration: line-through;
+    margin: 0 5px 0 -10px;
 }
 
 .card .name-price .promo-price {
@@ -430,8 +445,8 @@ main .products {
     display: flex;
     gap: 1px;
     width: 100%;
-    height: 10%;
-    margin-top: 3px;
+    height: 14%;
+    padding-bottom: 3px;
     border-radius: 0px 0px 6px 6px;
 }
 
@@ -442,7 +457,7 @@ main .products {
     border: none;
     border-radius: 0px 0px 0px 6px;
     background-color: #242526;
-    color: gray;
+    color: #8257E5;
     cursor: pointer;
     transition: all .3s ease;
 }
@@ -529,9 +544,31 @@ main .products {
         width: calc(100%);
     }
 
+    main .products {
+        margin: 50px -5px;
+    }
+
     .products .card {
         width: 177px;
         height: 314px;
-        border: 2px solid red;
+    }
+
+    .card .image {
+        height: 60%;
+    }
+
+    .card .name-price {
+        height: 24%;
+    }
+
+    .card .buy-more {
+        height: 15%;
+    }
+}
+
+@media screen and (max-width: 365px) {
+    .products .card {
+        width: 147px;
+        height: 284px;
     }
 }
