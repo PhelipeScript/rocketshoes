@@ -17,14 +17,15 @@ menuOpened.addEventListener('click', () => {
     main.style = 'filter: none'
 })
 
-categories.forEach((categorie) => {
+for(let categorie of categories) {
     categorie.addEventListener('click', () => {
         categories.forEach((categorie) => {
             categorie.classList.remove('selected')
         })
         categorie.classList.add('selected')
+        setTimeout(() => categorie.classList.remove('selected'), 10000)
     })
-})
+}
 
 searchInput.addEventListener('input', searchCategories)
 
@@ -44,7 +45,6 @@ function searchCategories() {
             categorie.style = 'display: flex'
         }
     }
-
 }
 
 const carousel = document.querySelector('.carousel')

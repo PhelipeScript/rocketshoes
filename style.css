@@ -253,7 +253,7 @@ nav .sidebar {
 }
 
 .sidebar ul::-webkit-scrollbar {
-    width: 1vw;
+    width: 5px;
     background-color: #2c2c2c;
 }
 
@@ -306,9 +306,9 @@ header h1 {
 main {
     display: flex;
     flex-direction: column;
-    padding: 45px 35px 0px;
+    padding: 45px 5px;
     min-height: 100%;
-    background-color: #343F4F;
+    background-color: #272727;
 }
 
 main h2 {
@@ -320,7 +320,7 @@ main h2 {
 }
 
 main .wrapper {
-    margin-top: 20px;
+    margin: 20px;
     max-width: 1200px;
     position: relative;
 }
@@ -348,7 +348,7 @@ main .wrapper {
     right: -23px;
 }
 
-main .wrapper .carousel {
+.wrapper .carousel {
     font-size: 0px;
     cursor: pointer;
     overflow: hidden;
@@ -382,9 +382,105 @@ main .wrapper .carousel {
 }
 
 main .products {
-    margin-top: 50px;
-    border-top: 2px solid #242526;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 50px 10px;
+    text-align: center;
 }
+
+.products .card {
+    background-color: #1F1F1F;
+    color: gray;
+    width: 210px;
+    height: 385px;
+    border-radius: 0px 0px 6px 6px;
+}
+
+.card .image {
+    width: 100%;
+    height: 70%;
+}
+
+.card .image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+}
+
+.card .name-price h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 10px 20px 7px;
+}
+
+.card .name-price .price {
+    font-size: 14px;
+    font-weight: 400;
+    text-decoration: line-through;
+}
+
+.card .name-price .promo-price {
+    font-size: 1rem;
+}
+
+.card .buy-more {
+    display: flex;
+    gap: 1px;
+    width: 100%;
+    height: 10%;
+    margin-top: 3px;
+    border-radius: 0px 0px 6px 6px;
+}
+
+.card .buy-more .buy {
+    width: 50%;
+    height: 100%;
+    font-size: 18px;
+    border: none;
+    border-radius: 0px 0px 0px 6px;
+    background-color: #242526;
+    color: gray;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.card .buy-more .buy:hover {
+    background-color: #8257E5;
+    color: #FFF;
+}
+
+.card .buy-more .buy:active {
+    background-color: #8257E5;
+    color: #000;
+}
+
+.card .buy-more .see-more {
+    width: 50%;
+    height: 100%;
+    font-size: 18px;
+    border: none;
+    border-radius: 0px 0px 6px 0px;
+    background-color: #242526;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.card .buy-more .see-more:hover {
+    opacity: .3;
+}
+
+.card .buy-more .see-more:active {
+    opacity: 1;
+    background-color: #8257E5;
+}
+
+.card .buy-more .see-more i {
+    color: gray;
+}
+
 
 @media screen and (max-width: 900px) {
     .carousel img {
@@ -431,5 +527,11 @@ main .products {
 
     .carousel img {
         width: calc(100%);
+    }
+
+    .products .card {
+        width: 177px;
+        height: 314px;
+        border: 2px solid red;
     }
 }
