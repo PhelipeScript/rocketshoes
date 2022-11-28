@@ -5,17 +5,21 @@ const   sidebar = document.querySelector('.nav-box'),
         categories = document.querySelectorAll('.sidebar ul li'),
         searchInput = document.querySelector('.search-categories input')
 
-menuClosed.addEventListener('click', () => {
+menuClosed.addEventListener('click', openMenu)
+
+function openMenu() {
     sidebar.classList.remove('close')
     sidebar.classList.add('open')
     main.style = 'filter: blur(4px)'
-})
+}
 
-menuOpened.addEventListener('click', () => {
+menuOpened.addEventListener('click', closeMenu)
+
+function closeMenu() {
     sidebar.classList.remove('open')
     sidebar.classList.add('close')
     main.style = 'filter: none'
-})
+}
 
 for(let categorie of categories) {
     categorie.addEventListener('click', () => {
@@ -23,8 +27,34 @@ for(let categorie of categories) {
             categorie.classList.remove('selected')
         })
         categorie.classList.add('selected')
-        setTimeout(() => categorie.classList.remove('selected'), 10000)
+        showCard(categorie)
+        closeMenu()
+        changeTitle()
     })
+}
+
+const categorieTitle = document.querySelector('.categorie-title')
+
+function changeTitle() {
+    let categorieSelected = document.querySelector('.selected')
+    categorieTitle.innerText = categorieSelected.innerText
+}
+
+function showCard(categorie) {
+    let cards = document.querySelectorAll('.card')
+    const allCategories = document.querySelector('.all-categories') 
+    let categorieName = categorie.innerText.toLowerCase()
+    cards.forEach((card) => {
+        if(allCategories.classList.contains('selected')) {
+            card.style = 'display: block'
+            return
+        }
+        if(card.classList.contains(categorieName)) {
+            card.style = 'display: block'
+        } else {
+            card.style = 'display: none'
+        }
+    }) 
 }
 
 searchInput.addEventListener('input', searchCategories)
@@ -98,10 +128,10 @@ carousel.addEventListener('mouseleave', dragStop)
 carousel.addEventListener('touchend', dragStop)
 
 let id = 0
-function createCard(image, prodName, price, promoPrice) {
+function createCard(image, prodName, price, promoPrice, categorieType = 'all') {
     id++
     return `
-            <div id=${id} class="card">
+            <div id=${id} class="card all ${categorieType.toLowerCase()}">
                 <div class="image">
                 <img src="${image}" alt="">
                 </div>
@@ -123,9 +153,10 @@ function createCard(image, prodName, price, promoPrice) {
 const products = document.querySelector('.products')
 
 products.innerHTML = 
-    createCard('assets/img-1.jpeg', 'Mizuno Wave Prophecy 8', '699.99', '429.99') + createCard('assets/img-2.png', 'Mizuno Wave Prophecy 6', '699.99', '429.99') 
-    + createCard('assets/img-3.jpeg', 'Nike Shox 12 Molas', '499.99', '319.99') 
-    + createCard('assets/img-4.jpeg', 'Mizuno Wave Prophecy 9', '699.99', '429.99') 
-    + createCard('assets/img-5.jpeg', 'Mizuno Wave Prophecy 8', '699.99', '429.99') 
-    + createCard('assets/img-6.png', 'Mizuno Wave Prophecy 7', '699.99', '429.99') 
-    + createCard('assets/img-7.jpeg', 'Mizuno Wave Prophecy 7', '699.99', '429.99') 
+    createCard('assets/img-1.jpeg', 'Mizuno Wave Prophecy 8', '699.99', '429.99', 'Mizuno') 
+    + createCard('assets/img-2.png', 'Mizuno Wave Prophecy 6', '699.99', '429.99', 'Mizuno') 
+    + createCard('assets/img-3.jpeg', 'Nike Shox 12 Molas', '499.99', '319.99', 'Nike') 
+    + createCard('assets/img-4.jpeg', 'Mizuno Wave Prophecy 9', '699.99', '429.99', 'Mizuno') 
+    + createCard('assets/img-5.jpeg', 'Mizuno Wave Prophecy 8', '699.99', '429.99', 'Mizuno') 
+    + createCard('assets/img-6.png', 'Mizuno Wave Prophecy 7', '699.99', '429.99', 'Mizuno') 
+    + createCard('assets/img-7.jpeg', 'Mizuno Wave Prophecy 7', '699.99', '429.99', 'Mizuno'); 
