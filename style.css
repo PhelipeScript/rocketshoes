@@ -96,7 +96,7 @@ header {
     width: 100%;
     max-width: 900px;
     padding: 10px;
-    z-index: 1;
+    z-index: 2;
 }
 
 header nav {
@@ -319,7 +319,7 @@ main h2 {
 }
 
 main .wrapper {
-    margin: 20px;
+    margin: 20px 20px 0px;
     max-width: 1200px;
     position: relative;
 }
@@ -373,7 +373,7 @@ main .wrapper {
 }
 
 .carousel img:hover {
-    transform: scale(1.1);
+    transform: scale(1.04);
 }
 
 .carousel img:first-child {
@@ -385,7 +385,7 @@ main .products {
     justify-content: center;
     flex-wrap: wrap;
     gap: 10px;
-    margin: 50px 10px;
+    margin: 5px 10px;
     text-align: center; 
     padding: 10px 0px;
 }
@@ -413,6 +413,11 @@ main .products {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: all .3s ease;
+}
+
+.card .image img:hover {
+    opacity: .7;
 }
 
 .card .name-price {
@@ -496,6 +501,51 @@ main .products {
     color: gray;
 }
 
+main .categorie-products {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.categorie-products .categorie-title {
+    padding: 10px;
+    width: max-content;
+}
+
+.categorie-products .search-product {
+    display: flex;
+    align-self: flex-end;
+    align-items: center;
+    background-color: #FFF;
+    min-width: 200px;
+    width: 25%;
+    height: 30px;
+    margin-right: 20px;
+    border-radius: 6px;
+    position: relative;
+}
+
+.categorie-products .search-product i {
+    position: absolute;
+    top: 30%;
+    left: 10px;
+    color: #1F1F1F;
+    pointer-events: none;
+}
+
+.categorie-products .search-product input {
+    width: 100%;
+    height: 100%;
+    padding-left: 30px;
+    font-size: 1rem;
+    color: #1F1F1F;
+    border-radius: 6px;
+    border: none;
+}
+
 
 @media screen and (max-width: 900px) {
     .carousel img {
@@ -545,7 +595,7 @@ main .products {
     }
 
     main .products {
-        margin: 50px -5px;
+        margin: 5px -5px;
     }
 
     .products .card {
