@@ -184,18 +184,9 @@ nav .sidebar {
     cursor: pointer;
 }
 
-.user-info img:last-child {
-    width: 25px;
-    height: 25px;
-    fill: white;
+.user-info i {
     position: absolute;
     right: 10px;
-    cursor: pointer;
-    transition: all .3s ease;
-}
-
-.user-info img:last-child:hover {
-    transform: rotate(359deg);
 }
 
 .sidebar > i {
@@ -221,24 +212,23 @@ nav .sidebar {
     height: 50px;
     border-radius: 6px;
     position: relative;
-    padding-left: 30px;
 }
 
 .sidebar .search-categories i {
-    color: #242526;
     position: absolute;
-    left: 10px;
-    top: 40%;
-    cursor: text;
+    top: 30%;
+    font-size: 1.2rem;
+    color: #1F1F1F;
+    pointer-events: none;
 }
 
 .sidebar .search-categories input {
     width: 100%;
     height: 100%;
-    outline: none;
     border: none;
     font-size: 1rem;
     border-radius: 6px;
+    padding-left: 30px;
 }
 
 .sidebar ul {
@@ -257,7 +247,7 @@ nav .sidebar {
 }
 
 .sidebar ul::-webkit-scrollbar-thumb {
-    background-color: #242526;
+    background-color: #1F1F1F;
 }
 
 .sidebar ul::-webkit-scrollbar-thumb:active {
@@ -530,8 +520,8 @@ main .categorie-products {
 
 .categorie-products .search-product i {
     position: absolute;
-    top: 30%;
-    left: 10px;
+    top: 15%;
+    font-size: 1.2rem;
     color: #1F1F1F;
     pointer-events: none;
 }
@@ -587,7 +577,7 @@ main .categorie-products {
     }
 
     .sidebar ul {
-        max-height: 450px;
+        height: calc(100vh - 75px);
     }
 
     .carousel img {

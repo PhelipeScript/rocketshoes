@@ -35,6 +35,8 @@ for(let categorie of categories) {
     })
 }
 
+const allInput = document.querySelectorAll('input')
+
 function scrollTop() { window.scrollTo({ top: 0, behavior: 'smooth' })}
 
 const categorieTitle = document.querySelector('.categorie-title')
@@ -144,6 +146,66 @@ carousel.addEventListener('touchmove', dragging)
 carousel.addEventListener('mouseup', dragStop)
 carousel.addEventListener('mouseleave', dragStop)
 carousel.addEventListener('touchend', dragStop)
+
+const searchProducts = document.querySelector('.search-product input')
+
+searchProducts.addEventListener('input', filterNameProd)
+
+function filterNameProd() {
+    let userInput = searchProducts.value.toLowerCase()
+    let cards = document.querySelectorAll('.card')
+    if(userInput != '') {
+        if(allCategories.classList.contains('selected')) {
+            for(let card of cards) {
+                let cardName = card.querySelector('h3').innerText.toLowerCase()
+                if(cardName.includes(userInput)) {
+                    card.style = 'display: block'
+                } else {
+                    card.style = 'display: none'
+                }
+            }
+        } else {
+            for(let categorie of categories) {
+                if (categorie.classList.contains('selected')) {
+                    let categorieName = categorie.innerText.toLowerCase()
+                    for(let card of cards) {
+                        if(card.classList.contains(categorieName)) {
+                            let cardName = card.querySelector('h3').innerText.toLowerCase()
+                            if(cardName.includes(userInput)) {
+                                card.style = 'display: block'
+                            } else {
+                                card.style = 'display: none'
+                            }
+                        } else {
+                            card.style = 'display: none'
+                        }
+                    }
+                }
+            }
+        }
+    }else {
+        if(allCategories.classList.contains('selected')) {
+            for(let card of cards) {
+                card.style = 'display: block'
+            }
+            return
+        }
+        for(let categorie of categories) {
+            if (categorie.classList.contains('selected')) {
+                let categorieName = categorie.innerText.toLowerCase()
+                for(let card of cards) {
+                    if(card.classList.contains(categorieName)) {
+                        card.style = 'display: block'
+                    } else {
+                        card.style = 'display: none'
+                    }
+                }
+            }
+        }
+    }
+}
+
+
 
 let id = 0
 function createCard(image, prodName, price, promoPrice, categorieType = 'all') {
