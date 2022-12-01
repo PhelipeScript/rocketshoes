@@ -3,7 +3,9 @@ const   sidebar = document.querySelector('.nav-box'),
         menuClosed = document.querySelector('.menu-closed'),
         main = document.querySelector('main'),
         categories = document.querySelectorAll('.sidebar ul li'),
-        searchInput = document.querySelector('.search-categories input')
+        searchInput = document.querySelector('.search-categories input'),
+        cartIcon = document.querySelector('.cart-icon'),
+        cartContent = document.querySelector('.cart-content')
 
 menuClosed.addEventListener('click', openMenu)
 
@@ -21,6 +23,31 @@ function closeMenu() {
     main.style = 'filter: none'
 }
 
+cartIcon.addEventListener('click', showCartBox || closeCartBox)
+
+function showCartBox() {
+    if(!cartContent.classList.contains('show-cart')) {
+        cartContent.classList.add('show-cart')
+        setTimeout(() => {
+            main.style = 'display: none'
+        }, 900)
+        return
+    }
+    closeCartBox()
+}
+
+function closeCartBox() {
+    if(cartContent.classList.contains('show-cart')) {
+        cartContent.classList.remove('show-cart')
+        main.style = 'display: flex'
+        setTimeout(() => {
+            main.style = 'display: flex'
+        }, 900)
+        return
+    }
+}
+
+
 for(let categorie of categories) {
     categorie.addEventListener('click', () => {
         categories.forEach((categorie) => {
@@ -32,6 +59,7 @@ for(let categorie of categories) {
         changeTitle()
         showTopContent()
         scrollTop()
+        closeCartBox()
     })
 }
 
@@ -223,8 +251,8 @@ function createCard(image, prodName, price, promoPrice, categorieType = 'all') {
                 </div>
                 </div>
                 <div class="buy-more">
-                    <button class="buy">Comprar</button>
-                    <button class="see-more"><i class="fa-solid fa-eye"></i></button>
+                    <button class="buy-button">Comprar</button>
+                    <button class="add-cart-button">Adicionar ao Carrinho</button>
                 </div>
             </div>
     `

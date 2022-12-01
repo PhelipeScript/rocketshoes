@@ -10,7 +10,7 @@ html::-webkit-scrollbar {
 }
 
 html::-webkit-scrollbar-thumb {
-    background-color: #1F1F1F;
+    background-color: gray;
 }
 
 body {
@@ -77,13 +77,14 @@ body {
 
 .rocketshoes {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     max-width: 900px;
     margin: 0 auto;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
     z-index: 1;
     position: relative;
     display: block;
+    overflow: hidden;
     animation: openingApp 3s ease forwards;
 }
 
@@ -96,7 +97,7 @@ header {
     width: 100%;
     max-width: 900px;
     padding: 10px;
-    z-index: 2;
+    z-index: 10;
 }
 
 header nav {
@@ -247,7 +248,7 @@ nav .sidebar {
 }
 
 .sidebar ul::-webkit-scrollbar-thumb {
-    background-color: #1F1F1F;
+    background-color: gray;
 }
 
 .sidebar ul::-webkit-scrollbar-thumb:active {
@@ -445,7 +446,7 @@ main .products {
     border-radius: 0px 0px 6px 6px;
 }
 
-.card .buy-more .buy {
+.card .buy-more .buy-button {
     width: 50%;
     height: 100%;
     font-size: 18px;
@@ -457,34 +458,34 @@ main .products {
     transition: all .3s ease;
 }
 
-.card .buy-more .buy:hover {
+.card .buy-more .buy-button:hover {
     background-color: #8257E5;
     color: #FFF;
 }
 
-.card .buy-more .buy:active {
-    background-color: #8257E5;
+.card .buy-more .buy-button:active {
     color: #000;
 }
 
-.card .buy-more .see-more {
+.card .buy-more .add-cart-button {
     width: 50%;
     height: 100%;
-    font-size: 18px;
+    font-size: 16px;
     border: none;
     border-radius: 0px 0px 6px 0px;
     background-color: #242526;
+    color: gray;
     cursor: pointer;
     transition: all .3s ease;
 }
 
-.card .buy-more .see-more:hover {
-    opacity: .3;
+.card .buy-more .add-cart-button:hover {
+    background-color: #8257E5;
+    color: #FFF;
 }
 
-.card .buy-more .see-more:active {
-    opacity: 1;
-    background-color: #8257E5;
+.card .buy-more .add-cart-button:active {
+    color: #000;
 }
 
 .card .buy-more .see-more i {
@@ -536,6 +537,30 @@ main .categorie-products {
     border: none;
 }
 
+.cart-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 48px;
+    height: 100vh;
+    width: 100%;
+    max-width: 900px;
+    background-color: #242526;
+    transform: translateX(200%);
+    z-index: 2;
+    transition: all 1s ease;
+}
+
+.cart-content.show-cart {
+    transform: translateX(0);
+}
+
+.cart-content h2 {
+    color: #8257E5;
+    font-size: 2rem;
+    font-weight: 700;
+}
 
 @media screen and (max-width: 900px) {
     .carousel img {
@@ -577,7 +602,7 @@ main .categorie-products {
     }
 
     .sidebar ul {
-        height: calc(100vh - 75px);
+        max-height: calc(100vh - 75px);
     }
 
     .carousel img {
