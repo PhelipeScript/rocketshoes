@@ -5,7 +5,8 @@ const   sidebar = document.querySelector('.nav-box'),
         categories = document.querySelectorAll('.sidebar ul li'),
         searchInput = document.querySelector('.search-categories input'),
         cartIcon = document.querySelector('.cart-icon'),
-        cartContent = document.querySelector('.cart-content')
+        cartContent = document.querySelector('.cart-content'), 
+        toBuy = document.querySelector('.cart-box p button')
 
 menuClosed.addEventListener('click', openMenu)
 
@@ -13,6 +14,7 @@ function openMenu() {
     sidebar.classList.remove('close')
     sidebar.classList.add('open')
     main.style = 'filter: blur(4px)'
+    cartContent.style = 'filter: blur(4px)'
 }
 
 menuOpened.addEventListener('click', closeMenu)
@@ -21,18 +23,21 @@ function closeMenu() {
     sidebar.classList.remove('open')
     sidebar.classList.add('close')
     main.style = 'filter: none'
+    cartContent.style = 'filter: none'
 }
 
-cartIcon.addEventListener('click', showCartBox || closeCartBox)
+cartIcon.addEventListener('click', showCartBox)
 
 function showCartBox() {
     if(!cartContent.classList.contains('show-cart')) {
+        closeMenu()
         cartContent.classList.add('show-cart')
         setTimeout(() => {
             main.style = 'display: none'
         }, 900)
         return
     }
+    closeMenu()
     closeCartBox()
 }
 
@@ -46,6 +51,11 @@ function closeCartBox() {
         return
     }
 }
+
+toBuy.addEventListener('click', () => {
+    closeCartBox()
+    closeMenu()
+})
 
 
 for(let categorie of categories) {
@@ -62,8 +72,6 @@ for(let categorie of categories) {
         closeCartBox()
     })
 }
-
-const allInput = document.querySelectorAll('input')
 
 function scrollTop() { window.scrollTo({ top: 0, behavior: 'smooth' })}
 
