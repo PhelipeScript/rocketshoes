@@ -92,40 +92,16 @@
         <section class="cart-content">
            <h2>Carrinho</h2>
            <div class="cart-box">
-               <p>
+               <p id="empty-cart">
                     Seu carrinho de compras se encontra vazio <br>
                     Navegue pelas nossas ofertas incríveis agora ! <br>
-                    <button>Compre agora</button>  
+                    <button onclick="buyNow()">Compre agora</button>  
                 </p>
-                <div class="prod-in-cart">
-                    <input type="checkbox" name="checked-to-buy" class="checked-to-buy">
-                    <img src="assets/mizuno-pics/mizuno-14.jpeg" alt="foto do tenis">
-                    <div class="product-info">
-                        <h3>Mizuno Wave prophecy sorayama</h3>
-                        <div class="size-box">
-                            <label for="size">Tamanho:</label>
-                            <select name="size" id="size">
-                                <option value="34">34</option>
-                                <option value="35">35</option>
-                                <option value="36">36</option>
-                                <option value="37">37</option>
-                                <option value="38">38</option>
-                                <option value="39">39</option>
-                                <option value="40">40</option>
-                                <option value="41">41</option>
-                                <option value="42">42</option>
-                                <option value="43">43</option>
-                            </select>
-                        </div>
-                        <div class="amount-box">
-                            <i class="fa-solid fa-minus"></i>
-                            <label for="amount">Quantidade:</label>
-                            <input value="1" type="number" name="amount" id="amount">
-                            <i class="fa-solid fa-plus"></i>
-                        </div>
-                    </div>
-                </div>
            </div>
+            <div class="buy-section">
+                <span>Total: <strong>R$ <span id="total-to-pay">0.00</span></strong></span> 
+                <button class="buy-button-cart">Comprar</button>
+            </div>
         </section>
     </div>
     <script src="main.js"></script>

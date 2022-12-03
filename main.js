@@ -5,8 +5,7 @@ const   sidebar = document.querySelector('.nav-box'),
         categories = document.querySelectorAll('.sidebar ul li'),
         searchInput = document.querySelector('.search-categories input'),
         cartIcon = document.querySelector('.cart-icon'),
-        cartContent = document.querySelector('.cart-content'), 
-        toBuy = document.querySelector('.cart-box p button')
+        cartContent = document.querySelector('.cart-content')
 
 menuClosed.addEventListener('click', openMenu)
 
@@ -51,12 +50,6 @@ function closeCartBox() {
         return
     }
 }
-
-toBuy.addEventListener('click', () => {
-    closeCartBox()
-    closeMenu()
-})
-
 
 for(let categorie of categories) {
     categorie.addEventListener('click', () => {
@@ -241,26 +234,107 @@ function filterNameProd() {
     }
 }
 
+const cartBox = document.querySelector('.cart-box')
+
+let cartId = 199
+let cartIdCount = 0
+function addToCart(cardId) {
+    cartId++
+    let idCart = cartId
+    const cartEmptyParagraph = document.getElementById('empty-cart')
+    cartEmptyParagraph.style = 'display: none'
+    const productId = document.getElementById(cardId)
+    const productImage = productId.querySelector('.image img').getAttribute('src')
+    const productName = productId.querySelector('.name-price h3').innerText
+    const productPrice = productId.querySelector('.price').innerText
+    const productPromoPrice = productId.querySelector('.promo-price').innerText
+    cartBox.innerHTML += ` 
+        <div id="${idCart}" class="prod-in-cart">
+            <input checked type="checkbox" name="checked-to-buy" class="checked-to-buy">
+            <img src="${productImage}" alt="foto do tenis">
+            <div class="product-info">
+                <h3>${productName}</h3>
+                <div class="product-price">
+                    <span class="prod-price">${productPrice}</span>
+                    <strong class="prod-promo-price">${productPromoPrice}</strong>
+                </div>
+                <div class="size-box">
+                    <label for="size">Tamanho:</label>
+                    <select name="size" id="size">
+                        <option value="34">34</option>
+                        <option value="35">35</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option value="39">39</option>
+                        <option value="40">40</option>
+                        <option value="41">41</option>
+                        <option value="42">42</option>
+                        <option value="43">43</option>
+                    </select>
+                </div>
+                <div class="amount-box">
+                    <i onclick="removeAmount(${idCart})" class="fa-solid fa-minus"></i>
+                    <label for="amount">Quantidade:</label>
+                    <input min="1" max="10" value="1" type="number" name="amount" id="amount${idCart}">
+                    <i onclick="addAmount(${idCart})" class="fa-solid fa-plus"></i>
+                </div>
+            </div>
+            <i onclick="removeFromCart(${idCart})" class="fa-solid fa-trash trash"></i>
+        </div> 
+    ` 
+    cartIdCount++
+}
+
+function removeAmount(idCart) {
+    let amount = document.getElementById('amount'+idCart) 
+    if (amount.value > 1) amount.value--
+}
+
+function addAmount(idCart) {
+    let amount = document.getElementById('amount'+idCart) 
+    if(amount.value < 10) amount.value++
+}
+
+function removeFromCart(idCart) {
+    cartIdCount--
+    let prodCartId = document.getElementById(idCart)
+    prodCartId.style = 'display: none'
+    if (cartIdCount == 0) {
+        cartBox.innerHTML = `
+            <p id="empty-cart">
+                Seu carrinho de compras se encontra vazio <br>
+                Navegue pelas nossas ofertas incríveis agora ! <br>
+                <button onclick="buyNow()">Compre agora</button>  
+            </p>
+        `
+    }
+}
+
+function buyNow() {
+    closeCartBox()
+    closeMenu()
+}
 
 
-let id = 0
+let cardId = 0
 function createCard(image, prodName, price, promoPrice, categorieType = 'all') {
-    id++
+    cardId++
     return `
-            <div id=${id} class="card ${categorieType.toLowerCase()}">
+            <div id=${cardId} class="card ${categorieType.toLowerCase()}">
                 <div class="image">
-                <img src="${image}" alt="">
+                    <img src="${image}" alt="">
                 </div>
                 <div class="name-price">
-                <h3>${prodName}</h3>
-                <div class="price-box">
-                    <span class="price">R$ ${price}</span>
-                    <span class="promo-price">R$ ${promoPrice}</span>
-                </div>
+                    <h3>${prodName}</h3>
+                    <div class="price-box">
+                        <span class="price">R$ ${price}</span>
+                        <strong class="promo-price">R$ ${promoPrice}</strong>
+                    </div>
                 </div>
                 <div class="buy-more">
                     <button class="buy-button">Comprar</button>
-                    <button class="add-cart-button">Adicionar ao Carrinho</button>
+                    <button onclick="addToCart(${cardId})" class="add-cart-button">Adicionar ao Carrinho</button>
                 </div>
             </div>
     `

@@ -544,13 +544,14 @@ main .categorie-products {
     position: fixed;
     top: 48px;
     padding: 0 5px;
-    height: 100vh;
+    height: 95.5%;
     width: 100%;
     max-width: 900px;
     z-index: 2;
     transform: translateX(200%);
     transition: all 1s ease;
     background-color: #272727;
+    border: 1px solid red;
 }
 
 .cart-content.show-cart {
@@ -567,7 +568,7 @@ main .categorie-products {
 .cart-content .cart-box {
     max-width: 500px;
     width: 100%;
-    height: 80%;
+    height: 85%;
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -582,7 +583,6 @@ main .categorie-products {
 }
 
 .cart-box p {
-    display: none;
     text-align: center;
     color: gray;
     font-size: 14px;
@@ -617,6 +617,7 @@ main .categorie-products {
 .cart-box .prod-in-cart {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     height: 100px;
     width: 100%;
     background-color: #1F1F1F;
@@ -626,8 +627,41 @@ main .categorie-products {
 }
 
 .prod-in-cart input[type='checkbox'] {
-    margin-left: 5px;
-    margin-right: 15px;
+    margin-right: 5px;
+    appearance: none;
+    position: relative;
+    cursor: pointer;
+}
+
+input[type='checkbox']:before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    background-color: transparent;
+    border: 1px solid gray;
+    border-radius: 4px;
+    display: block;
+}
+
+input[type='checkbox']:after {
+    content: '\f00c';
+    font-family: "Font Awesome 5 Free";
+    color: #FFF;
+    font-weight: 900;
+    position: absolute;
+    top: 2px;
+    left: 15%;
+    display: none;
+}
+
+input[type='checkbox']:checked {
+    border: none;
+    background-color: #8257E5;
+    border-radius: 4px;
+}
+
+input[type='checkbox']:checked:after {
+    display: block;
 }
 
 .prod-in-cart img {
@@ -642,24 +676,36 @@ main .categorie-products {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 100%;
+    width: 60%;
     height: 100%;
     color: gray;
 }
 
 .product-info h3 {
     font-size: 1.2rem;
-    color: #8257E5;
+    color: gray;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     height: 25px;
 }
 
+.product-info .product-price {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.product-price .prod-price {
+    text-decoration: line-through;
+    font-size: .8rem;
+}
+
 .product-info label {
     font-size: .8rem;
     opacity: .8;
     margin-right: 5px;
+    cursor: text;
 }
 
 .product-info .size-box {
@@ -667,11 +713,15 @@ main .categorie-products {
 }
 
 .size-box select {
-    width: 40px;
-    color: #FFF;
+    width: 30px;
+    text-align: center;
     background-color: #1F1F1F;
-    border-color: #8257E5;
+    color: #FFF;
+    border-color: #8257e52e;
+    outline: none;
     border-radius: 6px;
+    cursor: pointer;
+    appearance: none;
 }
 
 .product-info .amount-box {
@@ -698,7 +748,7 @@ main .categorie-products {
 .amount-box input {
     width: 25px;
     text-align: center;
-    color: gray;
+    color: #FFF;
     background-color: #1F1F1F;
     border: none;
     margin-left: 20px;
@@ -707,6 +757,59 @@ main .categorie-products {
 .amount-box input::-webkit-outer-spin-button,
 .amount-box input::-webkit-inner-spin-button {
     appearance: none;
+}
+
+.prod-in-cart > .trash {
+    color: gray;
+}
+
+.prod-in-cart > .trash:hover {
+    color: #F00;
+    transition: all .2s ease;
+}
+
+.cart-content .buy-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #8257E5;
+    position: absolute;
+    bottom: 8px;
+    padding: 5px;
+    width: 100%;
+    height: 50px;
+}
+
+.buy-section > span {
+    font-size: 1rem;
+    color: gray;
+}
+
+.buy-section strong {
+    color: #FFF;
+    margin-left: 5px;
+    margin-right: 20px;
+    opacity: .7;
+}
+
+.buy-section .buy-button-cart {
+    height: 100%;
+    width: 100px;
+    font-size: 18px;
+    border: none;
+    border-radius: 6px;
+    background-color: #8257E5;
+    color: #FFF;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.buy-button-cart:hover {
+    opacity: .8;
+}
+
+.buy-button-cart:active {
+    color: #000;
 }
 
 @media screen and (max-width: 900px) {
@@ -776,25 +879,11 @@ main .categorie-products {
     .card .buy-more {
         height: 15%;
     }
-
-    .product-info h3 {
-        width: 70%;
-    }
 }
 
 @media screen and (max-width: 365px) {
     .products .card {
         width: 147px;
         height: 284px;
-    }
-
-    .product-info h3 {
-        width: 60%;
-    }
-}
-
-@media screen and (max-width: 325px) {
-    .product-info h3 {
-        width: 50%;
     }
 }
