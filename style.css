@@ -279,6 +279,25 @@ nav .sidebar {
     right: 10px;
 }
 
+header .cart-icon-box {
+    position: relative;
+}
+
+.cart-icon-box .cart-count {
+    position: absolute;
+    top: -7px;
+    right: 2px;
+    color: #000;
+    background-color: #FFF;
+    border-radius: 50%;
+    width: 16px;
+    height: 15px;
+    text-align: center;
+    font-size: .74rem;
+    pointer-events: none;
+    overflow: hidden;
+}
+
 i {
     cursor: pointer;
     color: #8257E5;
@@ -551,7 +570,6 @@ main .categorie-products {
     transform: translateX(200%);
     transition: all 1s ease;
     background-color: #272727;
-    border: 1px solid red;
 }
 
 .cart-content.show-cart {
@@ -617,51 +635,13 @@ main .categorie-products {
 .cart-box .prod-in-cart {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    position: relative;
     height: 100px;
     width: 100%;
     background-color: #1F1F1F;
     border-radius: 6px;
     padding: 10px; 
     margin-bottom: 5px;
-}
-
-.prod-in-cart input[type='checkbox'] {
-    margin-right: 5px;
-    appearance: none;
-    position: relative;
-    cursor: pointer;
-}
-
-input[type='checkbox']:before {
-    content: '';
-    width: 16px;
-    height: 16px;
-    background-color: transparent;
-    border: 1px solid gray;
-    border-radius: 4px;
-    display: block;
-}
-
-input[type='checkbox']:after {
-    content: '\f00c';
-    font-family: "Font Awesome 5 Free";
-    color: #FFF;
-    font-weight: 900;
-    position: absolute;
-    top: 2px;
-    left: 15%;
-    display: none;
-}
-
-input[type='checkbox']:checked {
-    border: none;
-    background-color: #8257E5;
-    border-radius: 4px;
-}
-
-input[type='checkbox']:checked:after {
-    display: block;
 }
 
 .prod-in-cart img {
@@ -714,9 +694,11 @@ input[type='checkbox']:checked:after {
 
 .size-box select {
     width: 30px;
+    font-size: .9rem;
+    padding-left: 5px;
     text-align: center;
-    background-color: #1F1F1F;
     color: #FFF;
+    background-color: #1F1F1F;
     border-color: #8257e52e;
     outline: none;
     border-radius: 6px;
@@ -759,11 +741,13 @@ input[type='checkbox']:checked:after {
     appearance: none;
 }
 
-.prod-in-cart > .trash {
+.prod-in-cart .trash {
     color: gray;
+    position: absolute;
+    right: 15px;
 }
 
-.prod-in-cart > .trash:hover {
+.prod-in-cart .trash:hover {
     color: #F00;
     transition: all .2s ease;
 }
@@ -798,7 +782,7 @@ input[type='checkbox']:checked:after {
     font-size: 18px;
     border: none;
     border-radius: 6px;
-    background-color: #8257E5;
+    background-color: gray;
     color: #FFF;
     cursor: pointer;
     transition: all .3s ease;

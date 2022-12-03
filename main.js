@@ -250,7 +250,6 @@ function addToCart(cardId) {
     const productPromoPrice = productId.querySelector('.promo-price').innerText
     cartBox.innerHTML += ` 
         <div id="${idCart}" class="prod-in-cart">
-            <input checked type="checkbox" name="checked-to-buy" class="checked-to-buy">
             <img src="${productImage}" alt="foto do tenis">
             <div class="product-info">
                 <h3>${productName}</h3>
@@ -284,6 +283,18 @@ function addToCart(cardId) {
         </div> 
     ` 
     cartIdCount++
+    counterProdInCart()
+    increaseTotalPrice(productPromoPrice)
+}
+
+const cartCounter = document.querySelector('.cart-count')
+
+function counterProdInCart() {
+    if(cartIdCount > 9) {
+        cartCounter.innerText = '9+'
+        return
+    }
+    cartCounter.innerText = cartIdCount
 }
 
 function removeAmount(idCart) {
@@ -309,6 +320,9 @@ function removeFromCart(idCart) {
             </p>
         `
     }
+    let productPromoPrice = prodCartId.querySelector('.prod-promo-price')
+    decreaseTotalPrice(productPromoPrice.innerText)
+    counterProdInCart()
 }
 
 function buyNow() {
@@ -316,6 +330,22 @@ function buyNow() {
     closeMenu()
 }
 
+const buttonToBuyInCart = document.querySelector('.buy-section .buy-button-cart')
+const totalToPay = document.querySelector('.buy-section #total-to-pay')
+
+function increaseTotalPrice(productPromoPrice) {
+    const price = Number(productPromoPrice.match(/\d+/g).join().replace(',', '.'))
+    totalToPay.innerText = (price + Number(totalToPay.innerText)).toFixed(2)
+    buttonToBuyInCart.style = 'background-color: #8257E5;'
+}
+
+function decreaseTotalPrice(productPromoPrice) {
+    const price = Number(productPromoPrice.match(/\d+/g).join().replace(',', '.'))
+    totalToPay.innerText = (Number(totalToPay.innerText) - price).toFixed(2)
+    if(totalToPay.innerText == 0.00){
+        buttonToBuyInCart.style = 'background-color: gray;'
+    }
+}
 
 let cardId = 0
 function createCard(image, prodName, price, promoPrice, categorieType = 'all') {
