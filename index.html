@@ -106,6 +106,56 @@
                 <button class="buy-button-cart">Comprar</button>
             </div>
         </section>
+        <section class="payment-content">
+            <ul class="methods-payment">
+                <li class="pix"><i class="fa-brands fa-pix"></i>Pix</li>
+                <li class="credit-card chosen-payment"><i class="fa-solid fa-credit-card"></i>Cartão de crédito</li>
+            </ul>
+            <h3>Valor a pagar: R$ 0.00</h3>
+            <div class="payment-info">
+                <div id="pix">
+                    <div class="key">
+                        <span>Chave Pix: </span>
+                        <span>phelipescript@gmail.com</span>
+                    </div>
+                    <div class="key-type">
+                        <span>Tipo da chave: </span>
+                        <span>Email</span>
+                    </div>
+                    <a href="mailto:phelipescript@gmail.com">Enviar comprovante por e-mail</a>
+                </div>
+                <div id="credit-card">
+                    <form action="">
+                        <div class="card-info">
+                            <label for="card-number">Número do cartão</label>
+                            <input autocomplete="off"  required id="card-number" />
+                        </div>
+                
+                        <div class="card-info">
+                            <label for="card-holder">Nome do titular</label>
+                            <input autocomplete="off" required id="card-holder" />
+                        </div>
+                
+                        <div class="exp-sec-box">
+                            <div class="card-info">
+                                <label for="expiration-date">Expiração</label>
+                                <input autocomplete="off" required id="expiration-date" />
+                            </div>
+                    
+                            <div class="card-info">
+                                <label for="security-code">CVC</label>
+                                <input autocomplete="off" required id="security-code" />
+                            </div>
+                        </div>
+                        <input type="submit" value="Pagar">
+                    </form>
+                </div>
+                <div class="cancel-done">
+                    <button id="cancel">Cancelar</button>
+                    <button id="done">Finalizar</button>
+                </div>
+            </div>
+        </section>
     </div>
     <script src="main.js"></script>
 </body>

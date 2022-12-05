@@ -4,7 +4,7 @@ const   sidebar = document.querySelector('.nav-box'),
         main = document.querySelector('main'),
         categories = document.querySelectorAll('.sidebar ul li'),
         searchInput = document.querySelector('.search-categories input'),
-        cartIcon = document.querySelector('.cart-icon'),
+        cartIcon = document.querySelector('.cart-icon-box'),
         cartContent = document.querySelector('.cart-content')
 
 menuClosed.addEventListener('click', openMenu)
@@ -273,10 +273,8 @@ function addToCart(cardId) {
                     </select>
                 </div>
                 <div class="amount-box">
-                    <i onclick="removeAmount(${idCart})" class="fa-solid fa-minus"></i>
                     <label for="amount">Quantidade:</label>
-                    <input min="1" max="10" value="1" type="number" name="amount" id="amount${idCart}">
-                    <i onclick="addAmount(${idCart})" class="fa-solid fa-plus"></i>
+                    <input min="1" max="10" value="1" type="number" name="amount" id="amount${idCart}" disabled>
                 </div>
             </div>
             <i onclick="removeFromCart(${idCart})" class="fa-solid fa-trash trash"></i>
@@ -295,16 +293,6 @@ function counterProdInCart() {
         return
     }
     cartCounter.innerText = cartIdCount
-}
-
-function removeAmount(idCart) {
-    let amount = document.getElementById('amount'+idCart) 
-    if (amount.value > 1) amount.value--
-}
-
-function addAmount(idCart) {
-    let amount = document.getElementById('amount'+idCart) 
-    if(amount.value < 10) amount.value++
 }
 
 function removeFromCart(idCart) {
@@ -333,10 +321,15 @@ function buyNow() {
 const buttonToBuyInCart = document.querySelector('.buy-section .buy-button-cart')
 const totalToPay = document.querySelector('.buy-section #total-to-pay')
 
+let count = 0
 function increaseTotalPrice(productPromoPrice) {
     const price = Number(productPromoPrice.match(/\d+/g).join().replace(',', '.'))
     totalToPay.innerText = (price + Number(totalToPay.innerText)).toFixed(2)
-    buttonToBuyInCart.style = 'background-color: #8257E5;'
+    count++
+    if(count <= 1) {
+        buttonToBuyInCart.style = 'background-color: #8257E5;'
+        buttonToBuyInCart.addEventListener('click', showPaymentBox)
+    }
 }
 
 function decreaseTotalPrice(productPromoPrice) {
@@ -344,7 +337,70 @@ function decreaseTotalPrice(productPromoPrice) {
     totalToPay.innerText = (Number(totalToPay.innerText) - price).toFixed(2)
     if(totalToPay.innerText == 0.00){
         buttonToBuyInCart.style = 'background-color: gray;'
+        buttonToBuyInCart.removeEventListener('click', showPaymentBox) 
+        count = 0
     }
+}
+
+const paymentContent = document.querySelector('.payment-content')
+
+function showPaymentBox() {
+    closeMenu()
+    const prodAddinCart = document.querySelectorAll('.prod-in-cart')
+    prodAddinCart.forEach((e) => e.style = 'display: none')
+    menuClosed.style = 'display: none'
+    cartIcon.style = 'display: none'
+    buttonToBuyInCart.style = 'display: none'
+    paymentContent.classList.add('show-payment-content')
+}
+
+const paymentMethods = document.querySelectorAll('.methods-payment li')
+
+for(let paymentMethod of paymentMethods) {
+    paymentMethod.addEventListener('click', () => {
+        paymentMethods.forEach((e) => e.classList.remove('chosen-payment'))
+        paymentMethod.classList.add('chosen-payment')
+        chosenPayment()
+    })
+}
+
+function chosenPayment() {
+    const pixContent = document.getElementById('pix')
+    const creditCardContent = document.getElementById('credit-card')
+    const isPix = document.querySelector('.pix').classList.contains('chosen-payment')
+    if(isPix) {
+        creditCardContent.style = 'display: none'
+        pixContent.style = 'display: flex'
+        return
+    }
+    creditCardContent.style = 'display: block'
+    pixContent.style = 'display: none'
+}
+
+
+const paymentDone = document.getElementById('done')
+
+paymentDone.addEventListener('click', done)
+
+function done() {
+    paymentContent.classList.remove('show-payment-content')
+    buttonToBuyInCart.removeEventListener('click', showPaymentBox)
+    count = 0
+    cartIdCount = 0
+    counterProdInCart()
+    closeCartBox()
+    closeMenu()
+    menuClosed.style = 'display: block'
+    cartIcon.style = 'display: block'
+    buttonToBuyInCart.style = 'display: block'
+    cartBox.innerHTML = `
+    <p id="empty-cart">
+    Seu carrinho de compras se encontra vazio <br>
+    Navegue pelas nossas ofertas incríveis agora ! <br>
+    <button onclick="buyNow()">Compre agora</button>  
+    </p>
+    `
+    totalToPay.innerText = '0.00'
 }
 
 let cardId = 0
