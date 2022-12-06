@@ -234,6 +234,11 @@ function filterNameProd() {
     }
 }
 
+function buy(cardId) {
+    addToCart(cardId)
+    showCartBox()
+}
+
 const cartBox = document.querySelector('.cart-box')
 
 let cartId = 199
@@ -343,8 +348,10 @@ function decreaseTotalPrice(productPromoPrice) {
 }
 
 const paymentContent = document.querySelector('.payment-content')
+const priceinPriceTitle = document.querySelector('.payment-content h3 > span')
 
 function showPaymentBox() {
+    priceinPriceTitle.innerText = totalToPay.innerText
     closeMenu()
     const prodAddinCart = document.querySelectorAll('.prod-in-cart')
     prodAddinCart.forEach((e) => e.style = 'display: none')
@@ -364,10 +371,13 @@ for(let paymentMethod of paymentMethods) {
     })
 }
 
+const pixMethod = document.querySelector('.pix')
+const creditCardMethod = document.querySelector('.credit-card')
+const pixContent = document.getElementById('pix')
+const creditCardContent = document.getElementById('credit-card')
+
 function chosenPayment() {
-    const pixContent = document.getElementById('pix')
-    const creditCardContent = document.getElementById('credit-card')
-    const isPix = document.querySelector('.pix').classList.contains('chosen-payment')
+    const isPix = pixMethod.classList.contains('chosen-payment')
     if(isPix) {
         creditCardContent.style = 'display: none'
         pixContent.style = 'display: flex'
@@ -377,30 +387,68 @@ function chosenPayment() {
     pixContent.style = 'display: none'
 }
 
+const buyInCreditCard = document.getElementById('credit-card-buy')
+
+buyInCreditCard.addEventListener('click', (e) => e.preventDefault())
+
+const cancel = document.getElementById('cancel')
+
+cancel.addEventListener('click', changeMind)
+
+function changeMind() {
+    const prodAddinCart = document.querySelectorAll('.prod-in-cart')
+    prodAddinCart.forEach((e) => e.style = 'display: flex')
+    closeMenu()
+    paymentContent.classList.remove('show-payment-content')
+    menuClosed.style = 'display: block'
+    cartIcon.style = 'display: block'
+    buttonToBuyInCart.style = 'display: block; background-color: #8257E5;'
+}
 
 const paymentDone = document.getElementById('done')
 
 paymentDone.addEventListener('click', done)
 
 function done() {
-    paymentContent.classList.remove('show-payment-content')
-    buttonToBuyInCart.removeEventListener('click', showPaymentBox)
+    setTimeout(() => {
+        paymentContent.classList.remove('show-payment-content')
+        closeCartBox()
+        closeMenu()
+        menuClosed.style = 'display: block'
+        cartIcon.style = 'display: block'
+        buttonToBuyInCart.style = 'display: block'
+        buttonToBuyInCart.removeEventListener('click', showPaymentBox)
+        cartBox.innerHTML = `
+        <p id="empty-cart">
+        Seu carrinho de compras se encontra vazio <br>
+        Navegue pelas nossas ofertas incríveis agora ! <br>
+        <button onclick="buyNow()">Compre agora</button>  
+        </p>
+        `
+    }, 2000)
+    orderDone()
     count = 0
     cartIdCount = 0
     counterProdInCart()
-    closeCartBox()
-    closeMenu()
-    menuClosed.style = 'display: block'
-    cartIcon.style = 'display: block'
-    buttonToBuyInCart.style = 'display: block'
-    cartBox.innerHTML = `
-    <p id="empty-cart">
-    Seu carrinho de compras se encontra vazio <br>
-    Navegue pelas nossas ofertas incríveis agora ! <br>
-    <button onclick="buyNow()">Compre agora</button>  
-    </p>
-    `
     totalToPay.innerText = '0.00'
+}
+
+const orderDoneContent = document.querySelector('.order-done')
+const priceTitle = document.querySelector('.payment-content h3')
+
+function orderDone() {
+    orderDoneContent.style = 'display: block'
+    creditCardContent.style = 'display: none'
+    pixContent.style = 'display: none'
+    priceTitle.style = 'opacity: 0'
+    setTimeout(() => {
+        orderDoneContent.style = 'display: none'
+        creditCardContent.style = 'display: block'
+        pixContent.style = 'display: none'
+        priceTitle.style = 'opacity: 1'
+        pixMethod.classList.remove('chosen-payment')
+        creditCardMethod.classList.add('chosen-payment')
+    }, 2000)
 }
 
 let cardId = 0
@@ -419,7 +467,7 @@ function createCard(image, prodName, price, promoPrice, categorieType = 'all') {
                     </div>
                 </div>
                 <div class="buy-more">
-                    <button class="buy-button">Comprar</button>
+                    <button onclick="buy(${cardId})" class="buy-button">Comprar</button>
                     <button onclick="addToCart(${cardId})" class="add-cart-button">Adicionar ao Carrinho</button>
                 </div>
             </div>

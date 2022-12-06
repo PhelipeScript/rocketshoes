@@ -929,6 +929,18 @@ main .categorie-products {
     background-color: #49c6da;
 }
 
+.payment-info .order-done {
+    height: 80%;
+    font-size: 1.5rem;
+    text-align: center;
+    padding-top: 30%;
+    display: none;
+}
+
+.order-done i {
+    font-size: 40px;
+}
+
 .payment-info .cancel-done {
     display: flex;
     width: 100%;

@@ -111,7 +111,7 @@
                 <li class="pix"><i class="fa-brands fa-pix"></i>Pix</li>
                 <li class="credit-card chosen-payment"><i class="fa-solid fa-credit-card"></i>Cartão de crédito</li>
             </ul>
-            <h3>Valor a pagar: R$ 0.00</h3>
+            <h3>Valor a pagar: R$ <span>0.00</span></h3>
             <div class="payment-info">
                 <div id="pix">
                     <div class="key">
@@ -147,8 +147,12 @@
                                 <input autocomplete="off" required id="security-code" />
                             </div>
                         </div>
-                        <input type="submit" value="Pagar">
+                        <input type="submit" value="Pagar" id="credit-card-buy">
                     </form>
+                </div>
+                <div class="order-done">
+                    <i style="color: #0F0;" class="fa-solid fa-circle-check"></i>
+                    <p>Pedido realizado com sucesso</p>
                 </div>
                 <div class="cancel-done">
                     <button id="cancel">Cancelar</button>
