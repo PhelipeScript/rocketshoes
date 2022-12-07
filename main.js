@@ -66,6 +66,9 @@ for(let categorie of categories) {
     })
 }
 
+const footerToTop = document.querySelector('footer > i')
+footerToTop.addEventListener('click', scrollTop)
+
 function scrollTop() { window.scrollTo({ top: 0, behavior: 'smooth' })}
 
 const categorieTitle = document.querySelector('.categorie-title')
